@@ -1,11 +1,10 @@
-import Component from '@ember/component';
-import { action, get, computed } from '@ember/object';
-import { connect } from 'ember-redux';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import connect from '../helpers/demo';
 
-const stateToComputed = function(state, attrs) {
+const stateToComputed = function(state) {
   return {
-    number: state.fooz,
-    greeting: `Hello ${attrs.name}!`
+    number: state.fooz
   };
 };
 
@@ -16,15 +15,9 @@ const dispatchToActions = (dispatch) => {
 };
 
 class MyClazz extends Component {
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
     this.color = 'green';
-  }
-
-  @computed('greeting')
-  get bar() {
-    const someKey = get(this, 'greeting');
-    return `${someKey} - computed`;
   }
 
   @action
